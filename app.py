@@ -5,15 +5,18 @@ app = Flask(__name__)
 
 # مسار المجلد الأساسي للتطبيق
 BASE_DIR = Path(__file__).resolve().parent
+# مجلد النوتات اللي المفروض يكون "مسموح" فقط
+NOTES_DIR = BASE_DIR / "notes"
+
 
 @app.route("/")
 def index():
     """
     الصفحة الرئيسية:
-    - توضح إن الموقع يعرض ملفات نصية من مجلد notes
-    - تعطي مثال للاعبين يبدأون منه
+    - توضح إن الموقع يعرض ملفات نصية من مجلد notes/
+    - تعطي مثال intro.txt يبدأون منه
     """
-    example_file = "notes/intro.txt"
+    example_file = "intro.txt"
     return render_template("index.html", example_file=example_file)
 
 
@@ -22,23 +25,25 @@ def view_file():
     """
     مسار عرض الملفات:
     يأخذ باراميتر ?file= من الـ URL
-    ويقرأ الملف مباشرة بدون أي تحقق أمني (هنا الثغرة)
+    ويقرأ الملف من داخل مجلد notes/ (هنا الفكرة)
+    اللاعب يقدر يستخدم ../ عشان يطلع لملفات خارج notes/ مثل flag.txt
     """
     filename = request.args.get("file", "")
 
     if not filename:
         return render_template("view.html", filename=None, content="No file specified.")
 
-    # ⚠️ هنا الضعف: ما فيه أي فلترة لمسار الملف
-    target_path = BASE_DIR / filename
+    # نخلي المسار دائماً يبدأ من داخل notes/
+    # ولا نمنع استخدام ../ (هنا الثغرة المقصودة)
+    target_path = (NOTES_DIR / filename).resolve()
 
     try:
-        # نقرأ الملف كنص
         content = target_path.read_text(encoding="utf-8", errors="ignore")
     except FileNotFoundError:
         content = "File not found."
     except IsADirectoryError:
         content = "Cannot read a directory."
+        # أي خطأ ثاني نطبعه نصيًا (عادي للمبتدئين)
     except Exception as e:
         content = f"Error reading file: {e}"
 

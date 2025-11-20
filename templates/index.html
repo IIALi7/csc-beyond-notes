@@ -95,7 +95,7 @@
     </p>
 
     <h2>Try it</h2>
-    <p>You can view a file by specifying its path using the <code>?file=</code> parameter.</p>
+    <p>You can view a file by specifying its name using the <code>?file=</code> parameter.</p>
 
     <div class="example">
         <div>Example URL:</div>
@@ -106,18 +106,19 @@
 
     <h2>Custom File</h2>
     <form action="/view" method="get">
-        <label for="file">File path:</label>
-        <input type="text" id="file" name="file" placeholder="e.g. notes/intro.txt">
+        <label for="file">File name:</label>
+        <input type="text" id="file" name="file" placeholder="e.g. intro.txt">
         <button type="submit">View</button>
     </form>
     <p class="hint">
-        Hint: The backend simply joins the file path you send with the server directory.
-        Think about how file paths work in operating systems.
+        Hint: Files are stored under an internal notes/ directory,
+        and the backend simply joins that directory with the file name you send.
+        Think about how relative paths like <code>../</code> behave.
     </p>
 </div>
 
 <div class="footer">
-    CTF Camp – Web Day · Challenge: Lost File Viewer
+    CTF Camp – Web Day · Challenge: Beyond Notes
 </div>
 </body>
 </html>
