@@ -1,0 +1,5 @@
+Welcome to the Lost File Viewer system.
+
+This service is intended to provide students with access to public notes only.
+
+If you accidentally discover internal files, please report it to the admin. 🙂

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View File</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: #020617;
+            color: #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 16px;
+        }
+        .card {
+            background-color: #0b1120;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid #1f2937;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
+            white-space: pre-wrap;
+        }
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+        .filename {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+        .content-box {
+            background-color: #020617;
+            border-radius: 8px;
+            border: 1px solid #1f2937;
+            padding: 16px;
+            min-height: 120px;
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.95rem;
+        }
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back {
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>File Viewer</h1>
+    {% if filename %}
+        <div class="filename">Showing file: <code>{{ filename }}</code></div>
+    {% else %}
+        <div class="filename">No file specified.</div>
+    {% endif %}
+    <div class="content-box">
+{{ content }}
+    </div>
+    <div class="back">
+        <a href="/">← Back to home</a>
+    </div>
+</div>
+</body>
+</html>

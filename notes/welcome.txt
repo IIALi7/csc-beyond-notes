@@ -1,0 +1,5 @@
+Hello student,
+
+You are only allowed to open files inside the notes/ directory.
+
+Any other access is strictly forbidden by the system... (hopefully).
